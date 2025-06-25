@@ -1,23 +1,22 @@
 import mongoose from "mongoose";
 
-const customersSchema = new mongoose.Schema({
-    name:{
+const locationsSchema = new mongoose.Schema({
+    storeName: {
         type: String,
         required: true,
     },
-    email:{
+    city:{
         type: String,
         required: true,
-        unique: true
     },
     address:{
         type: String,
         required: true,
     },
     phone:{
-        type: Number,
-        required: false,
+        type:Number,
+        required: true,
     }
-})
 
-export default mongoose.model('Customers', customersSchema)
+})
+export default mongoose.model('Locations', locationsSchema)

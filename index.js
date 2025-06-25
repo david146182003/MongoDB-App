@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
 import Customers from './models/customers.js';
+import Locations from './models/locations.js';
+
 const app = express();
 const PORT = process.env.PORT;
 
@@ -30,6 +32,32 @@ app.post('/customers', async(req, res)=>{
 app.delete('/customers', async (req, res)=>{
     
 })
+
+app.get('/locations', async (req, res)=>{
+    const locations = await Locations.find({});
+    res.json(locations)
+})
+
+app.post('/locations', async(req, res)=>{
+    const newLocation = await new Locations({
+        storeName: req.body.storeName,
+        city: req.body.city,
+        address: req.body.address,
+        phone: req.body.phone
+    })
+    let result = await newLocation.save();
+    res.json(result)
+})
+
+// app.get('/customers/:email', async (req, res)=>{
+//     try{
+//         const customerEmail = req.params.email;
+//         if(customerEmail === Customers.find({},))
+//     }catch{
+
+//     }
+// })
+
 
 app.listen(PORT, ()=>{
     console.log(`server is running on ${PORT}`)
