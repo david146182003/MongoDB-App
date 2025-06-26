@@ -64,6 +64,11 @@ app.get('/customers/:id', async (req, res)=>{
         res.send("Invalid id").status(400);
     }
 })
+app.patch('/customers/:id', async (req, res)=>{
+    const updates = req.body;
+    const updateCustomer = await Customers.updateOne({_id: req.params.id},{$set: updates});
+    res.json(updateCustomer)
+})
 
 app.delete('/customers/:id', async (req, res)=>{
     try{
