@@ -94,6 +94,18 @@ app.get('/reviews', async(req, res)=>{
     res.json(reviews)
 })
 
+app.post('/reviews', async(req, res)=>{
+        const newReview = new Reviews({
+        title: req.body.title,
+        comment: req.body.comment,
+        rating: req.body.rating
+    })
+    const result = await newReview.save()
+    res.json(result)
+})
+
+
+
 
 app.listen(PORT, ()=>{
     console.log(`server is running on ${PORT}`)
