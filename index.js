@@ -94,6 +94,18 @@ app.get('/locations/:id', async(req, res)=>{
     }
 })
 
+app.delete('/locations/:id', async (req, res)=>{
+    try{
+        const result = await Locations.deleteOne({_id: req.params.id});
+        if(result.deletedCount===0){
+            res.status(404).json({error:'No customer found'})
+        }
+        res.json(result)
+    }catch{
+        res.send("Invalid id")
+    }
+})
+
 app.get('/reviews', async(req, res)=>{
     const reviews = await Reviews.find();
     res.json(reviews)
