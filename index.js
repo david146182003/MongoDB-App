@@ -49,14 +49,17 @@ app.post('/locations', async(req, res)=>{
     res.json(result)
 })
 
-// app.get('/customers/:email', async (req, res)=>{
-//     try{
-//         const customerEmail = req.params.email;
-//         if(customerEmail === Customers.find({},))
-//     }catch{
-
-//     }
-// })
+app.get('/customers/:id', async (req, res)=>{
+    try{
+        const customer = await Customers.findById({_id: req.params.id});
+        if(!customer){
+            return res.status(404).json({error: 'Customer id is not found'})
+        }
+        res.status(200).json(customer)
+    }catch(error){
+        console.error(error);
+    }
+})
 
 
 app.listen(PORT, ()=>{
